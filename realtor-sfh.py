@@ -6,17 +6,17 @@ import logging
 
 logging.basicConfig(level=logging.INFO)
 
+
+LOCATION = input("Location (e.g. Miami_FL, 90210): ").replace(" ", "")
 BASE_URL = "https://www.realtor.com/realestateandhomes-search/"
-STUB = "Hillsborough-County_FL/type-single-family-home/price-100000-na/age-3/sby-6/"
+STUB = f"{LOCATION}/type-single-family-home/price-100000-na/age-3/sby-6/"
 URL = BASE_URL + STUB
 PAGES = 5
 AGENT = "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/113.0"
 
 
 def getSoup(URL):
-    headers = {
-        "user-agent": AGENT
-    }
+    headers = {"user-agent": AGENT}
     try:
         page = requests.get(URL, headers=headers)
         soup = BeautifulSoup(page.content, "html.parser")
@@ -42,7 +42,7 @@ def get_home_data(house):
     return {
         "PRICE $": price,
         "BEDS": beds,
-        "BATHS": baths,
+        "BATHS": baths.replace("+", ""),
         "SQFT": sqft,
         "LOTSIZE": lotsize,
         "ADDRESS": address,
@@ -74,7 +74,7 @@ def scrapeIt():
 def sendIt():
     homes = scrapeIt()
     df = pd.DataFrame(homes)
-    df.to_csv("homes.csv", index=False)
+    df.to_csv(f"{LOCATION}.csv", index=False)
     logging.info(df)
 
 
