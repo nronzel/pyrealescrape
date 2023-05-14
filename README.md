@@ -20,8 +20,11 @@ change as often as a dynamically generated class name would.
 ## Description
 
 Currently allows searching location. You can search using the following case-sensitive formats:
+
 `Tampa FL`
+
 `Hillsborough-County FL`
+
 `33604`
 
 I intend to sanitize the inputs and automatically form the input into the proper format.
@@ -31,7 +34,7 @@ The Beds, Baths, Type, Min Price, and Min Age are all currently fixed to the fol
 - `beds`: minimum 1 bedroom
 - `baths`: minimum 1 bathroom
 - `type`: single family homes only
-- `min price`: $100_000 | this is to prevent listings with no price or 1$ listings
+- `min price`: $100,000 -- this is to prevent listings with no price or 1$ listings
 - `min age`: at least 3 years old. I may change this to 1 year, but it
 prevents new construction that isn't complete yet.
 
