@@ -87,10 +87,10 @@ def getHomeData(house):
 
     return {
         "PRICE $": price,
-        "BEDS": beds,
-        "BATHS": baths.replace("+", ""),
+        "BEDS": int(beds),
+        "BATHS": int(baths.replace("+", "")),
         "SQFT": int(sqft.replace(",", "")) if sqft != "-" else "-",
-        "LOTSIZE": hy.split_lot_size(lotsize)[0],
+        "LOTSIZE": int(hy.split_lot_size(lotsize)[0]),
         "LOTUNIT": hy.split_lot_size(lotsize)[1],
         "SIZE": size,
         "HtY": hty_ratio or "-",
@@ -98,7 +98,7 @@ def getHomeData(house):
         "STREET": street,
         "CITY/TOWN": city,
         "STATE": state,
-        "ZIP": zip_code,
+        "ZIP": int(zip_code),
         "LINK": f"https://www.realtor.com{link}",
     }
 
@@ -106,11 +106,11 @@ def getHomeData(house):
 def parseSoup(URL):
     try:
         soup = getSoup(URL)
-        if soup is None:  # If there was an error getting the page
+        if soup is None:
             return None
         homes = []
         house_elements = soup.find_all("li", attrs={"data-testid": "result-card"})
-        if not house_elements:  # If there are no house elements, stop scraping
+        if not house_elements:
             logging.warning(f"No house elements found at URL: {URL}")
             return None
         for house in house_elements:
