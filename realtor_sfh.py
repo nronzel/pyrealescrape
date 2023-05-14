@@ -11,7 +11,7 @@ HOME_TYPE = "type-single-family-home"
 PAGES = 5
 MIN_PRICE = "price-100000-na"
 
-LOCATION = input("Location (e.g. Miami_FL, 90210): ").replace(" ", "")
+LOCATION = input("Location (e.g. Miami FL, 90210): ").replace(" ", "_").strip()
 BASE_URL = "https://www.realtor.com/realestateandhomes-search/"
 OPTIONS = (
     f"{LOCATION}/beds-1/baths-1/{HOME_TYPE}/{MIN_PRICE}/age-3+/pnd-hide/55p-hide/sby-6/"
@@ -62,8 +62,18 @@ def getHomeData(house):
 
     try:
         address = data.find("div", attrs={"data-label": "pc-address"}).text
-    except AttributeError:
-        address = "-"
+        address_parts = address.split(",")
+        if len(address_parts) != 3:
+            raise ValueError("Address format is incorrect")
+        street = address_parts[0].strip()
+        city = address_parts[1].strip()
+        state_zip = address_parts[2].split()
+        if len(state_zip) != 2:
+            raise ValueError("State and ZIP format is incorrect")
+        state = state_zip[0].strip()
+        zip_code = state_zip[1].strip()
+    except (AttributeError, ValueError):
+        street, city, state, zip_code = "-", "-", "-", "-"
 
     link = house.find("div", class_="photo-wrap").a["href"]
 
@@ -84,10 +94,10 @@ def getHomeData(house):
         "SIZE": size,
         "HtY": hty_ratio or "-",
         "HtY %": house_ratio or "-",
-        "STREET": address.split(",")[0].strip(),
-        "CITY/TOWN": address.split(",")[1].strip(),
-        "STATE": address.split(",")[2].split(" ")[1].strip(),
-        "ZIP": address.split(",")[2].split(" ")[2].strip(),
+        "STREET": street,
+        "CITY/TOWN": city,
+        "STATE": state,
+        "ZIP": zip_code,
         "LINK": f"https://www.realtor.com{link}",
     }
 
@@ -116,7 +126,7 @@ def parseSoup(URL):
 def scrapeIt():
     all_homes = []
     for i in range(1, PAGES + 1):
-        URL = BASE_URL + STUB + f"pg-{i}"
+        URL = BASE_URL + OPTIONS + f"pg-{i}"
         new_homes = parseSoup(URL)
         if new_homes is None:
             logging.error("Stopping due to non 200 response.")
