@@ -63,7 +63,7 @@ def getHomeData(house):
         "LOTUNIT": hy.split_lot_size(lotsize)[1],
         "SIZE": size,
         "HtY": hty_ratio or "-",
-        "HOUSE RATIO": house_ratio or "-",
+        "HtY %": house_ratio or "-",
         "ADDRESS": address,
         "LINK": f"https://www.realtor.com{link}",
     }
