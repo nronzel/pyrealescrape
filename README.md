@@ -4,12 +4,15 @@ Realescrape is a listing scraper for Realtor.com
 
 Dependencies:
 Python 3.10.6
+
 Requests, BeautifulSoup4, Pandas, PyMongo
+
 MongoDB instance running locally on default port (27017)
 
 > PLEASE NOTE: This is for educational purposes only and all data is publicly visible and available on the website without an account. The data being scraped is not monetized in any way, and absolutely no images are scraped.
 
 I fully expect this to break often and will try my best to keep it up to date.
+
 I tried using `data-testid` selectors as much as possible in the hopes it doesn't
 change as often as a dynamically generated class name would.
 
@@ -37,7 +40,7 @@ prevents new construction that isn't complete yet.
 
 ## Coming Soon
 
-- custom parameters - Location is now user input
+- custom parameters
     - ~location~
     - beds
     - baths
