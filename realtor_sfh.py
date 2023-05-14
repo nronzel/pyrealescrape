@@ -141,13 +141,16 @@ def scrapeIt():
 def sendIt():
     homes = scrapeIt()
     if homes:
+        # open MongoDB connection on default port
         client = MongoClient('mongodb://localhost:27017')
         db = client['homedatabase']
         collection = db['homes']
 
+        # create a dataframe and export to CSV
         df = pd.DataFrame(homes)
         df.to_csv(f"scans/{LOCATION}.csv", index=False)
 
+        # create dict from the dataframe and insert into the DB
         data_dict = df.to_dict("records")
         collection.insert_many(data_dict)
 
