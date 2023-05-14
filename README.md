@@ -34,7 +34,7 @@ The Beds, Baths, Type, Min Price, and Min Age are all currently fixed to the fol
 - `beds`: minimum 1 bedroom
 - `baths`: minimum 1 bathroom
 - `type`: single family homes only
-- `min price`: $100,000 -- this is to prevent listings with no price or 1$ listings
+- `min price`: $100,000 to prevent listings with no or unrealistically low price
 - `min age`: at least 3 years old. I may change this to 1 year, but it
 prevents new construction that isn't complete yet.
 
@@ -50,7 +50,7 @@ prevents new construction that isn't complete yet.
     - baths
     - single or multi family
 - ~output to MongoDB and CSV~
-- potentially rewrite in Go
+- potential rewrite in Go with Colly framework
 - ~Parse the address into separate categories to normalize. This will also
   allow filtering by excluding towns or zip codes you don't like.~
 - rotating user-agents
