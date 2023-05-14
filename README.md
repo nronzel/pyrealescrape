@@ -1,8 +1,8 @@
-# realescrape
+# Realescrape
 
 Realescrape is a listing scraper for Realtor.com
 
-Dependencies:
+## Dependencies
 
 Python 3.10.6
 
@@ -40,26 +40,31 @@ prevents new construction that isn't complete yet.
 
 ## Usage
 
--- to be filled out --
+-- to be filled out at a later time --
 
 ## Coming Soon
+
+- TODO
+    - refactor the code - would like the code to be more DRY, currently very wet.
 
 - custom parameters
     - ~location~
     - beds
     - baths
     - single or multi family
+    - min price
+    - max price?
 - ~output to MongoDB and CSV~
 - potential rewrite in Go with Colly framework
 - ~Parse the address into separate categories to normalize. This will also
   allow filtering by excluding towns or zip codes you don't like.~
 - rotating user-agents
-- implementing a proxy and rotating proxies to help prevent rate-limiting
+- implementing use of a proxy and rotating proxies to help prevent rate-limiting
 
 ## Goals and Lessons
 
 My goal for this project is to have a frontend written in SolidJS, data
-stored in MongoDB, and served through an Express API.
+stored in MongoDB, and requests from the frontend served through an Express API.
 
 I DO NOT intend on setting up public hosting for this due to how easily it will break,
 and legality issues regarding others' intentions with the data.
