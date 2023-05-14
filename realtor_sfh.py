@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 import time
 import logging
 import house_to_yard as hy
+from pymongo import MongoClient
 
 logging.basicConfig(level=logging.INFO)
 
@@ -140,8 +141,16 @@ def scrapeIt():
 def sendIt():
     homes = scrapeIt()
     if homes:
+        client = MongoClient('mongodb://localhost:27017')
+        db = client['homedatabase']
+        collection = db['homes']
+
         df = pd.DataFrame(homes)
         df.to_csv(f"scans/{LOCATION}.csv", index=False)
+
+        data_dict = df.to_dict("records")
+        collection.insert_many(data_dict)
+
         logging.info(df)
     else:
         logging.error("No home data scraped.")
