@@ -3,6 +3,7 @@
 Realescrape is a listing scraper for Realtor.com
 
 Dependencies:
+
 Python 3.10.6
 
 Requests, BeautifulSoup4, Pandas, PyMongo
