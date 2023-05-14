@@ -45,9 +45,11 @@ def getHomeData(house):
     beds = extract_text(data, "pc-meta-beds")
     baths = extract_text(data, "pc-meta-baths")
     sqft = extract_text(data, "pc-meta-sqft").replace(",", "")
-    lotsize = data.find("li", attrs={"data-label": "pc-meta-sqftlot"}).text
-
-    size = hy.parse_lot_size(lotsize) if lotsize != "-" else "-"
+    try:
+        lotsize = data.find("li", attrs={"data-label": "pc-meta-sqftlot"}).text
+        size = hy.parse_lot_size(lotsize) if lotsize != "-" else "-"
+    except AttributeError:
+        logging.error("Attribute Error")
     address = data.find("div", attrs={"data-label": "pc-address"}).text
     link = house.find("div", class_="photo-wrap").a["href"]
 
@@ -69,6 +71,10 @@ def getHomeData(house):
         "HtY": hty_ratio or "-",
         "HtY %": house_ratio or "-",
         "ADDRESS": address,
+        "STREET": address.split(",")[0],
+        # "CITY/TOWN":
+        # "STATE":
+        # "ZIP":
         "LINK": f"https://www.realtor.com{link}",
     }
 
@@ -91,7 +97,6 @@ def parseSoup(URL):
                 logging.error(f"Error when parsing house data at URL: {URL}")
         return homes
     except requests.exceptions.HTTPError:
-        logging.error("Stopping scraping due to 404 error")
         return None
 
 
@@ -112,7 +117,6 @@ def scrapeIt():
 def sendIt():
     homes = scrapeIt()
     if not homes:
-        logging.error("No home data scraped.")
         return
     df = pd.DataFrame(homes)
     df.to_csv(f"scans/{LOCATION}.csv", index=False)
