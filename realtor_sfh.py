@@ -55,7 +55,9 @@ def getHomeData(house):
         sqft = "-"
 
     try:
-        lotsize = data.find("li", attrs={"data-label": "pc-meta-sqftlot"}).text
+        lotsize = data.find("li", attrs={"data-label": "pc-meta-sqftlot"}).text.replace(
+            ",", ""
+        )
         size = hy.parse_lot_size(lotsize) if lotsize != "-" else "-"
     except AttributeError:
         lotsize = "-"
@@ -88,9 +90,9 @@ def getHomeData(house):
     return {
         "PRICE $": price,
         "BEDS": int(beds),
-        "BATHS": int(baths.replace("+", "")),
+        "BATHS": float(baths.replace("+", "")),
         "SQFT": int(sqft.replace(",", "")) if sqft != "-" else "-",
-        "LOTSIZE": int(hy.split_lot_size(lotsize)[0]),
+        "LOTSIZE": hy.split_lot_size(lotsize)[0],
         "LOTUNIT": hy.split_lot_size(lotsize)[1],
         "SIZE": size,
         "HtY": hty_ratio or "-",
@@ -142,9 +144,9 @@ def sendIt():
     homes = scrapeIt()
     if homes:
         # open MongoDB connection on default port
-        client = MongoClient('mongodb://localhost:27017')
-        db = client['homedatabase']
-        collection = db['homes']
+        client = MongoClient("mongodb://localhost:27017")
+        db = client["homedatabase"]
+        collection = db["homes"]
 
         # create a dataframe and export to CSV
         df = pd.DataFrame(homes)
