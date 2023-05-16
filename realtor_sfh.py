@@ -100,7 +100,7 @@ def getHomeData(house):
         "STREET": street,
         "CITY/TOWN": city,
         "STATE": state,
-        "ZIP": int(zip_code),
+        "ZIP": int(zip_code) if zip_code != "-" else "-",
         "LINK": f"https://www.realtor.com{link}",
     }
 
