@@ -58,7 +58,7 @@ def getHomeData(house):
         lotsize = data.find("li", attrs={"data-label": "pc-meta-sqftlot"}).text.replace(
             ",", ""
         )
-        size = hy.parse_lot_size(lotsize) if lotsize != "-" else "-"
+        size, _ = hy.split_lot_size(lotsize) if lotsize != "-" else ("-", "-")
     except AttributeError:
         lotsize = "-"
         size = "-"
