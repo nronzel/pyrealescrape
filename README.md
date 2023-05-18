@@ -45,7 +45,7 @@ prevents new construction that isn't complete yet.
 ## Coming Soon
 
 - TODO
-    - refactor the code - would like the code to be more DRY, currently very wet.
+    - refactor codebase and clean it up
 
 - custom parameters
     - ~location~
@@ -60,6 +60,7 @@ prevents new construction that isn't complete yet.
   allow filtering by excluding towns or zip codes you don't like.~
 - rotating user-agents
 - implementing use of a proxy and rotating proxies to help prevent rate-limiting
+- frontend
 
 ## Goals and Lessons
 
