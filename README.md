@@ -36,7 +36,7 @@ The Beds, Baths, Type, Min Price, and Min Age are all currently fixed to the fol
 - `type`: single family homes only
 - `min price`: $100,000 to prevent listings with no or unrealistically low price
 - `min age`: at least 3 years old. I may change this to 1 year, but it
-prevents new construction that isn't complete yet.
+  prevents new construction that isn't complete yet.
 
 ## Usage
 
@@ -45,17 +45,18 @@ prevents new construction that isn't complete yet.
 ## Coming Soon
 
 - TODO
-    - refactor codebase and clean it up
+
+  - refactor codebase and clean it up
 
 - custom parameters
-    - ~location~
-    - beds
-    - baths
-    - single or multi family
-    - min price
-    - max price?
+  - ~location~
+  - beds
+  - baths
+  - single or multi family
+  - min price
+  - max price?
 - ~output to MongoDB and CSV~
-- potential rewrite in Go with Colly framework
+- ~potential rewrite in Go with Colly framework~ [see rewrite](https://github.com/nronzel/realescrape-go)
 - ~Parse the address into separate categories to normalize. This will also
   allow filtering by excluding towns or zip codes you don't like.~
 - rotating user-agents
@@ -81,7 +82,7 @@ My original intention was to use some form of real estate API and create a
 public site one could use to browse homes as a real estate investor.
 
 However, I found it quite difficult to find any free, or even cheap, public
-real estate APIs. I resorted to writing this scraper and instead saw it as a
+real estate APIs without needing membership with a real estate broker to have MLS access. I resorted to writing this scraper and instead saw it as a
 good opportunity to learn new concepts.
 
 ## Troubleshooting
