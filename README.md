@@ -1,6 +1,6 @@
-# Realescrape
+# PyRealescrape
 
-Realescrape is a listing scraper for Realtor.com
+PyRealescrape is a listing scraper for Realtor.com
 
 ## Dependencies
 
